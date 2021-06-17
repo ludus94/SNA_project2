@@ -67,7 +67,7 @@ def set_attributes(G):
     bs = dict()
 
     for node in G.nodes():
-        bs["belief"] = round(random.random(), 5)
+        bs["belief"] = round(random.random(), 5)#restituisce un valore tra 0 e 1
         bs["stub"] = round(random.random(), 5)
         attrs[node] = bs
         bs = dict()

@@ -59,9 +59,8 @@ def shapley_closeness_ip(graph):
             prev_dist=d_value[index]
             prev_sv=curr_sv
             index-=1
-        SV[v]-=sum
+        SV[v]+=1-sum
     return SV
-
 
 def set_attributes(G):
     attrs = dict()
@@ -134,11 +133,11 @@ G_W.add_edge('D', 'G',weight=7)
 G_W.add_edge('E', 'F',weight=8)
 G_W.add_edge('F', 'G',weight=9)
 
-print("Shapley degree:")
-print(shapley_degree_ip(G))
-print("Shapley threshold:")
-print(shapley_threshold_ip(G,2))
+#print("Shapley degree:")
+#print(shapley_degree_ip(G))
+#print("Shapley threshold:")
+#print(shapley_threshold_ip(G,2))
 print("Shapley closeness:")
-#print(shapley_closeness_ip(G_W))
-print("FJ dynamics:")
+print(shapley_closeness_ip(G_W))
+#print("FJ dynamics:")
 #print(FJ_dynamics(G))

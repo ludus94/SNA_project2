@@ -67,10 +67,10 @@ def set_attributes(G):
     bs = dict()
 
     for node in G.nodes():
-        bs["belief"] = round(random.random(), 5)
+        bs["belief"] = round(random.random(), 5)#restituisce un valore tra 0 e 1
         bs["stub"] = round(random.random(), 5)
         attrs[node] = bs
-        bs = dict()
+        bs = dict()#reinizializzo perchè predispongo al nodo successivo
     #print(attrs)
     nx.set_node_attributes(G, attrs)
 
@@ -86,13 +86,13 @@ def FJ_dynamics(graph):
     x_u=dict()
     x_u_prec=dict()
     for v in graph.nodes():#instant 0
-        x_u[v]=round(graph.nodes[v]["belief"],5)
-    while not check_dict(x_u_prec,x_u):#condizione
+        x_u[v]=graph.nodes[v]["belief"]#all'inizio l'opinione di tutti i nodi è pari alla loro belief
+    while not check_dict(x_u_prec,x_u):#condizione secondo cui fermo il ciclo solo quando le opinioni non variano più
         x_u_prec=x_u.copy()
         for node in graph.nodes():
             s_u=graph.nodes[node]['stub']
-            neigh=graph.degree(node)
-            x_u[node]=round(s_u*graph.nodes[node]['belief']+(1-s_u)*(1/neigh)*sum(x_u_prec[t] for t in graph[node]),5)
+            neigh=graph.degree(node)#il numero di vicini di node
+            x_u[node]=round(s_u*graph.nodes[node]['belief']+(1-s_u)*(1/neigh)*sum(x_u_prec[t] for t in graph[node]),5)#aggiorno l'opinione del nodo attuale
 
         ts+=1
     print("Ts ",ts)
